@@ -1,5 +1,6 @@
 package com.bingo.plate;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,9 +11,13 @@ public class PlateGenerator {
   private String blackColor = "\033[30m";
   private String underLine = "\033[4m";
   private String middleLine = "\033[9m";
-  private String numberFound = "\033[32m";
+  private String greenNumber= "\033[32m";
   private String end = "\033[0m";
   private int[][] plateNumbers = plateNumber.getNumberPlace();
+
+  private int[] rowOne = new int[5];
+  private int[] rowTwo = new int[5];
+  private int[] rowThree = new int[5];
 
   private int[] numbersOnBingo = new int[90];
 
@@ -22,6 +27,7 @@ public class PlateGenerator {
   }
 
   //getter
+  public int[][] getPlateNumbers() { return  this.plateNumbers; }
   public int[] getNumbersOnBingo() { return this.numbersOnBingo; }
 
 
@@ -87,6 +93,22 @@ public class PlateGenerator {
     return false;
   }
 
+  public void checkForBingoOneRowPrint() {
+
+    rowsWithoutZero();
+
+    if (checkForFirstRow()) {
+      //System.out.println("Bingo in first row!!");
+      System.out.println(greenNumber + Arrays.toString(rowOne) + end);
+    } else if (checkForSecondRow()) {
+      //System.out.println("Bingo in second row!!");
+      System.out.println(greenNumber + Arrays.toString(rowTwo) + end);
+    } else if (checkForThirdRow()) {
+      //System.out.println("Bingo in third row!!");
+      System.out.println(greenNumber + Arrays.toString(rowThree) + end);
+    }
+  }
+
   public boolean checkForBingTwoRows() {
     if (checkForFirstRow() && checkForSecondRow()) {
       //System.out.println("Bingo in first and second row!!");
@@ -102,11 +124,42 @@ public class PlateGenerator {
     return false;
   }
 
+  public void checkForBingTwoRowsPrint() {
+
+    rowsWithoutZero();
+
+    if (checkForFirstRow() && checkForSecondRow()) {
+      //System.out.println("Bingo in first and second row!!");
+      System.out.println(greenNumber + Arrays.toString(rowOne) + end);
+      System.out.println(greenNumber + Arrays.toString(rowTwo) + end);
+    } else if (checkForSecondRow() && checkForThirdRow()) {
+      //System.out.println("Bingo in second and third row!!");
+      System.out.println(greenNumber + Arrays.toString(rowTwo) + end);
+      System.out.println(greenNumber + Arrays.toString(rowThree) + end);
+    } else if (checkForThirdRow() && checkForFirstRow()) {
+      //System.out.println("Bingo in first and third row!!");
+      System.out.println(greenNumber + Arrays.toString(rowOne) + end);
+      System.out.println(greenNumber + Arrays.toString(rowThree) + end);
+    }
+  }
+
   public boolean checkForBingoThreeRows() {
     if (checkForFirstRow() && checkForSecondRow() && checkForThirdRow()) {
       return true;
     }
     return false;
+  }
+
+  public void checkForBingThreeRowsPrint() {
+
+    rowsWithoutZero();
+
+    if (checkForThirdRow()) {
+      //System.out.println("Bingo in first and second row!!");
+      System.out.println(greenNumber + Arrays.toString(rowOne) + end);
+      System.out.println(greenNumber + Arrays.toString(rowTwo) + end);
+      System.out.println(greenNumber + Arrays.toString(rowThree) + end);
+    }
   }
 
   public boolean checkForFirstRow() {
@@ -189,5 +242,34 @@ public class PlateGenerator {
 
     return false;
   }
+
+  public void rowsWithoutZero() {
+
+    int counter = 0;
+
+    for (int i = 0; i < plateNumbers[0].length; i++) {
+      if (plateNumbers[0][i] != 0) {
+        rowOne[counter] = plateNumbers[0][i];
+        counter++;
+      }
+    }
+    counter = 0;
+
+    for (int i = 0; i < plateNumbers[1].length; i++) {
+      if (plateNumbers[1][i] != 0) {
+        rowTwo[counter] = plateNumbers[1][i];
+        counter++;
+      }
+    }
+    counter = 0;
+
+    for (int i = 0; i < plateNumbers[2].length; i++) {
+      if (plateNumbers[2][i] != 0) {
+        rowThree[counter] = plateNumbers[2][i];
+        counter++;
+      }
+    }
+  }
+
 
 }

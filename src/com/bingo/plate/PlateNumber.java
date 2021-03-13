@@ -46,6 +46,7 @@ public class PlateNumber {
     }
     // }
 
+
     //sorting
     for (int j = 0; j < numberPlace[0].length; j++) {
       sortArray(j, numberPlace);

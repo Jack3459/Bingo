@@ -32,17 +32,20 @@ public class BingoLauncher {
       if (plateGenerator.checkForBingoOneRow() && oneRow == 0) {
         //plateGenerator.checkForBingoOneRow();
         System.out.println(greenText + "Bingo in one row!" + end);
+        plateGenerator.checkForBingoOneRowPrint();
         oneRow++;
       }
 
       if (plateGenerator.checkForBingTwoRows() && twoRows == 0) {
         //plateGenerator.checkForBingTwoRows();
         System.out.println(greenText + "Bingo in two rows!" + end);
+        plateGenerator.checkForBingTwoRowsPrint();
         twoRows++;
       }
 
       if (plateGenerator.checkForBingoThreeRows() && threeRows == 0) {
         System.out.println(greenText + "!!BINGO!!!" + end);
+        plateGenerator.checkForBingThreeRowsPrint();
         threeRows++;
       }
 
